@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>？？？</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: "Arial", sans-serif;
+      background: none;
+      overflow: hidden;
+    }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .popup {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    .popup button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #ff7f50;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .final-message {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow: auto;
+      word-break: break-word;
+      line-height: 1.6;
+    }
+    .red {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<div id="overlay" class="overlay">
+  <div class="popup">
+    <div id="message">啊，打開了呢？</div>
+    <button onclick="nextPopup()">確定</button>
+  </div>
+</div>
+
+<div id="finalMessage" class="final-message"></div>
+
+<script>
+  const messages = [
+    "啊，打開了呢？",
+    "ㅋㅋㅋ，嚇到了嗎？",
+    "怎麼這麼可愛啊ㅋㅋㅋ",
+    "好想見你，要見面嗎？",
+    "귀요미怎麼這個表情，我觀察你很久了~",
+    "上次穿那麼漂亮，然後超級俐落地殺掉了目標呢...진짜...너무 예뻐！！！",
+    "可以再穿一次那個裙子給我看嗎？我知道那個晚會你會來的。",
+    "귀요미，可以嗎？",
+    "我會等你的~要來哦！"
+  ];
+
+  let current = 0;
+
+  function nextPopup() {
+    current++;
+    if (current < messages.length) {
+      document.getElementById("message").innerText = messages[current];
+    } else {
+      document.getElementById("overlay").style.display = "none";
+      const finalDiv = document.getElementById("finalMessage");
+      finalDiv.style.display = "block";
+
+      const repeatText = "我等你";
+      const repeatCount = 300;
+      const before = repeatText.repeat(repeatCount);
+      const middle = '<span class="red">你會來的，對吧？</span>';
+      const after = repeatText.repeat(repeatCount);
+      finalDiv.innerHTML = before + middle + after;
+    }
+  }
+</script>
+
+</body>
+</html>
